@@ -1,7 +1,6 @@
 <?php
-include "../bootstrap.php";
-include BASE_DIR . "/includes/db.php";
-include BASE_DIR . "/admin-panel/includes/layout/header.php";
+
+include "includes/layout/header.php";
 
 $stmt = $connection->query("SELECT * FROM posts ORDER BY id DESC LIMIT 3");
 $posts = $stmt->fetchAll();

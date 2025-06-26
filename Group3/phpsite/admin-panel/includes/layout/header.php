@@ -1,3 +1,10 @@
+<?php
+include __DIR__ . "/../../../bootstrap.php";
+include __DIR__ . "/../../../includes/db.php";
+
+$path = $_SERVER['REQUEST_URI'];
+
+?>
 <!DOCTYPE html>
 <html dir="rtl" lang="fa">
 
@@ -14,7 +21,11 @@
       crossorigin="anonymous"
     /> -->
   <link rel="stylesheet" href="../../assets/css/bootstrap.css">
-  <link rel="stylesheet" href="./assets/css/style.css" />
+  <?php if (str_contains($path, 'pages')): ?>
+    <link rel="stylesheet" href="../../assets/css/style.css" />
+  <?php else: ?>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  <?php endif ?>
 </head>
 
 <body>

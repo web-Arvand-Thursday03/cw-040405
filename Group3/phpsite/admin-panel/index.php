@@ -1,6 +1,4 @@
 <?php
-include "includes/db.php";
-include "../bootstrap.php";
 include "includes/layout/header.php";
 
 
@@ -15,9 +13,8 @@ $stmt = $connection->query("SELECT * FROM categories");
 $categories = $stmt->fetchAll();
 
 if (isset($_GET['action'])) {
-
+  $id = $_GET['id'];
   if ($_GET['action'] == 'delete') {
-    $id = $_GET['id'];
     if ($_GET['entity'] == "post") {
       $stmt = $connection->query("DELETE FROM posts WHERE id=$id");
       header("Location:index.php");
@@ -28,6 +25,9 @@ if (isset($_GET['action'])) {
       $stmt = $connection->query("DELETE FROM categories WHERE id=$id");
       header("Location:index.php");
     }
+  } elseif ($_GET['action'] == 'approve') {
+    $stmt = $connection->query("UPDATE comments SET status=1 WHERE id=$id");
+    header("Location:index.php");
   }
 }
 
@@ -59,7 +59,7 @@ if (isset($_GET['action'])) {
             <tbody>
               <?php foreach ($posts as $post): ?>
                 <tr>
-                  <th><?= $post['id'] ?></th>
+                  <th ><?= $post['id'] ?></th>
                   <td><?= $post['title'] ?></td>
                   <td><?= $post['author'] ?></td>
                   <td>
@@ -96,7 +96,8 @@ if (isset($_GET['action'])) {
                     <?php if ($comment['status'] == 1): ?>
                       <a href="#" class="btn btn-sm btn-outline-dark disabled">تایید شده</a>
                     <?php else: ?>
-                      <a href="/admin-panel/index.php?action=approve&entity=comment&id=<?= $comment['id'] ?>" class="btn btn-sm btn-outline-primary">در انتظار تایید</a>
+                      <a href="/admin-panel/index.php?action=approve&entity=comment&id=<?= $comment['id'] ?>"
+                        class="btn btn-sm btn-outline-primary">در انتظار تایید</a>
                     <?php endif ?>
                     <a href="/admin-panel/index.php?action=delete&entity=comment&id=<?= $comment['id'] ?>" class="btn btn-sm btn-outline-danger">حذف</a>
                   </td>
