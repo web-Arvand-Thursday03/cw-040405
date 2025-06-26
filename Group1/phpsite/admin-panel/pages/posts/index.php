@@ -1,103 +1,66 @@
-<?php 
+<?php
 include "../../../bootstrap.php";
+include "../../includes/db.php";
+include BASE_DIR . "/admin-panel/includes/layout/header.php";
 
-include BASE_DIR."/admin-panel/includes/layout/header.php";
-
-
-
+$stmt = $connection->query("SELECT * FROM posts ORDER BY id DESC");
+$posts = $stmt->fetchAll();
 
 
 
 ?>
 
-  <div class="container-fluid">
-    <div class="row">
-      <!-- Sidebar Section -->
-      <?php include "../../includes/layout/sidebar.php"?>
+<div class="container-fluid">
+  <div class="row">
+    <!-- Sidebar Section -->
+    <?php include "../../includes/layout/sidebar.php" ?>
 
-      <!-- Main Section -->
-      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-        <div
-          class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <h1 class="fs-3 fw-bold">مقالات</h1>
+    <!-- Main Section -->
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="fs-3 fw-bold">مقالات</h1>
 
-          <div class="btn-toolbar mb-2 mb-md-0">
-            <a href="./create.html" class="btn btn-sm btn-dark">
-              ایجاد مقاله
-            </a>
-          </div>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <a href="./create.php" class="btn btn-sm btn-dark">
+            ایجاد مقاله
+          </a>
         </div>
+      </div>
 
-        <!-- Posts -->
-        <div class="mt-4">
-          <div class="table-responsive small">
-            <table class="table table-hover align-middle">
-              <thead>
+      <!-- Posts -->
+      <div class="mt-4">
+        <div class="table-responsive small">
+          <table class="table table-hover align-middle">
+            <thead>
+              <tr>
+                <th>id</th>
+                <th>عنوان</th>
+                <th>نویسنده</th>
+                <th>عملیات</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach ($posts as $post): ?>
                 <tr>
-                  <th>id</th>
-                  <th>عنوان</th>
-                  <th>نویسنده</th>
-                  <th>عملیات</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th>1</th>
-                  <td>لورم ایپسوم متن ساختگی</td>
-                  <td>منصوری</td>
+                  <th><?= $post['id'] ?></th>
+                  <td><?= $post['title'] ?></td>
+                  <td><?= $post['author'] ?></td>
                   <td>
                     <a
-                      href="./edit.html"
+                      href="./edit.php"
                       class="btn btn-sm btn-outline-dark">ویرایش</a>
                     <a
                       href="#"
                       class="btn btn-sm btn-outline-danger">حذف</a>
                   </td>
                 </tr>
-                <tr>
-                  <th>2</th>
-                  <td>لورم ایپسوم متن</td>
-                  <td>منصوری</td>
-                  <td>
-                    <a
-                      href="./edit.html"
-                      class="btn btn-sm btn-outline-dark">ویرایش</a>
-                    <a
-                      href="#"
-                      class="btn btn-sm btn-outline-danger">حذف</a>
-                  </td>
-                </tr>
-                <tr>
-                  <th>3</th>
-                  <td>لورم ایپسوم متن ساختگی</td>
-                  <td>منصوری</td>
-                  <td>
-                    <a
-                      href="./edit.html"
-                      class="btn btn-sm btn-outline-dark">ویرایش</a>
-                    <a
-                      href="#"
-                      class="btn btn-sm btn-outline-danger">حذف</a>
-                  </td>
-                </tr>
-                <tr>
-                  <th>4</th>
-                  <td>لورم ایپسوم</td>
-                  <td>منصوری</td>
-                  <td>
-                    <a
-                      href="./edit.html"
-                      class="btn btn-sm btn-outline-dark">ویرایش</a>
-                    <a
-                      href="#"
-                      class="btn btn-sm btn-outline-danger">حذف</a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+              <?php endforeach ?>
+            </tbody>
+          </table>
         </div>
-      </main>
-    </div>
+      </div>
+    </main>
   </div>
-  <?php include "../../includes/layout/footer.php"?>
+</div>
+<?php include "../../includes/layout/footer.php" ?>
