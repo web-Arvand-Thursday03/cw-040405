@@ -1,7 +1,7 @@
 <?php
 
 //ثابت constant
-define("DNS", "mysql:host=localhost;dbname=blog_project2;charset=utf8mb4");
+define("DNS", "mysql:host=localhost;dbname=blog_project;charset=utf8mb4");
 define("DB_USER", "root");
 define('DB_PASS', '');
 

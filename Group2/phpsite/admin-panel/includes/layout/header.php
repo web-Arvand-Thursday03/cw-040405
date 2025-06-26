@@ -1,3 +1,9 @@
+<?php
+$path = $_SERVER['REQUEST_URI'];
+
+
+
+?>
 <!DOCTYPE html>
 <html dir="rtl" lang="fa">
 
@@ -13,12 +19,16 @@
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
         crossorigin="anonymous" /> -->
     <link rel="stylesheet" href="<?= URL_ROOT ?>admin-panel/assets/css/bootstrap.css">
-    <link rel="stylesheet" href="./assets/css/style.css" />
+    <?php if (str_contains($path, 'pages')): ?>
+        <link rel="stylesheet" href="../../assets/css/style.css" />
+    <?php else: ?>
+        <link rel="stylesheet" href="./assets/css/style.css" />
+    <?php endif ?>
 </head>
 
 <body>
     <header class="navbar sticky-top bg-secondary flex-md-nowrap p-0 shadow-sm">
-        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-5 text-white" href="index.html">پنل ادمین</a>
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-5 text-white" href="<?= URL_ROOT ?>admin-panel">پنل ادمین</a>
 
         <button class="ms-2 nav-link px-3 text-white d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu">
             <i class="bi bi-justify-left fs-2"></i>
